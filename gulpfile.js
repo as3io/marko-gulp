@@ -7,6 +7,7 @@ const {
 } = require('gulp');
 const autoprefixer = require('autoprefixer');
 const cache = require('gulp-cached');
+const cssnano = require('cssnano');
 const eslint = require('gulp-eslint');
 const postcss = require('gulp-postcss');
 const sass = require('gulp-sass');
@@ -53,6 +54,7 @@ const css = () => src('src/styles/app.scss')
         'Opera >= 30',
       ],
     }),
+    cssnano(),
   ]))
   .pipe(sourcemaps.write('.'))
   .pipe(dest('./dist'));
