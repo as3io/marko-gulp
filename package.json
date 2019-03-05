@@ -1,0 +1,10 @@
+{
+  "name": "marko-gulp",
+  "version": "0.1.0",
+  "description": "Experiment: Marko server-side website with Gulp build tools.",
+  "main": "src/index.js",
+  "repository": "https://github.com/as3io/marko-gulp.git",
+  "author": "Jacob Bare <jacob@limit0.io>",
+  "license": "MIT",
+  "private": true
+}
