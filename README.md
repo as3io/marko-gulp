@@ -23,7 +23,7 @@ Lints both JavaScript and SASS files.
 - Runs Stylelint on `src/styles/**/*.scss`. Respects rules defined in `.stylelintrc` and `.stylelintignore`. Uses the `stylelint-config-twbs-bootstrap` configuration.
 
 ### Build
-Reads the `src/styles.app.scss` SASS file and transforms it into a regular CSS file with the following pipleline:
+Reads the `src/styles/app.scss` SASS file and transforms it into a regular CSS file with the following pipleline:
 - Compile SASS using `node-sass`
 - Autoprefix the CSS using `autoprefixer` via `postcss` (using browser targets corresponding to Bootstrap 4.3.1)
 - Minify the CSS using `cssnano` via `postcss`
