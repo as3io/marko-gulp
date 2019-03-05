@@ -7,6 +7,10 @@
   "author": "Jacob Bare <jacob@limit0.io>",
   "license": "MIT",
   "private": true,
+  "dependencies": {
+    "express": "^4.16.4",
+    "marko": "^4.15.3"
+  },
   "devDependencies": {
     "autoprefixer": "^9.4.10",
     "eslint": "^5.15.1",
