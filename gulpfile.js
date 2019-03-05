@@ -10,6 +10,7 @@ const cache = require('gulp-cached');
 const eslint = require('gulp-eslint');
 const postcss = require('gulp-postcss');
 const sass = require('gulp-sass');
+const sourcemaps = require('gulp-sourcemaps');
 const { spawn } = require('child_process');
 
 const { log } = console;
@@ -35,6 +36,7 @@ const lint = () => src(['src/**/*.js', '!src/**/*.marko.js'])
   .pipe(eslint.format());
 
 const css = () => src('src/styles/app.scss')
+  .pipe(sourcemaps.init())
   .pipe(sass().on('error', sass.logError))
   .pipe(postcss([
     autoprefixer({
@@ -52,6 +54,7 @@ const css = () => src('src/styles/app.scss')
       ],
     }),
   ]))
+  .pipe(sourcemaps.write('.'))
   .pipe(dest('./dist'));
 
 const build = parallel(css);
