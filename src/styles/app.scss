@@ -29,7 +29,7 @@ a {
 }
 
 select {
+  max-width: 25vw;
   // Test for autoprefixer
   appearance: none;
-  max-width: 25vw;
 }
