@@ -1,6 +1,8 @@
 # Marko with Gulp build tools.
 Example respository for creating a dev enviroment with Gulp, ESLint, MarkoJS and Express. Supports autoprefixed, minified SASS compilation with source maps.
 
+**Note:** This environment currently treats Marko as a _server-side_ templating engine, not as an isomorphic (server + client) component library. An implementation for use with client-side components is in the works.
+
 ## Usage
 1. Clone the repository
 2. Run `yarn dev`
