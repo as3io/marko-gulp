@@ -1,4 +1,5 @@
 require('marko/node-require');
+const pkg = require('../package.json');
 const app = require('./app');
 
 const { log } = console;
@@ -8,7 +9,8 @@ app.get('/', (req, res) => {
   res.json({ ping: 'pong' });
 });
 
+log(`> Starting ${pkg.name} v${pkg.version}...`);
 app.listen(port, () => {
-  log(`Listening on http://0.0.0.0:${port}`);
-  if (process.send) process.send('running');
+  log(`> Server ready on http://0.0.0.0:${port}`);
+  if (process.send) process.send('ready');
 });
