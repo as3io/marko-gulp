@@ -44,9 +44,9 @@ const server = async () => {
   });
   node.on('close', (code, signal) => {
     const exited = [];
-    if (code) exited.push(`code ${code}`);
-    if (signal) exited.push(`signal ${signal}`);
-    log(`Process ${green('exited')} with ${magenta(exited.join(' '))}`);
+    if (code) exited.push(`code ${magenta(code)}`);
+    if (signal) exited.push(`signal ${magenta(signal)}`);
+    log(`Process ${green('exited')} with ${exited.join(' ')}`);
   });
 };
 
