@@ -29,6 +29,7 @@
     "gulp-postcss": "^8.0.0",
     "gulp-sass": "^4.0.2",
     "gulp-sourcemaps": "^2.6.5",
+    "gulp-stylelint": "^8.0.0",
     "node-sass": "^4.11.0",
     "stylelint": "^9.10.1",
     "stylelint-config-twbs-bootstrap": "^0.3.0"
