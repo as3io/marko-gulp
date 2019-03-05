@@ -9,12 +9,20 @@ const autoprefixer = require('autoprefixer');
 const cache = require('gulp-cached');
 const cssnano = require('cssnano');
 const eslint = require('gulp-eslint');
+const livereload = require('gulp-livereload');
+const log = require('fancy-log');
 const postcss = require('gulp-postcss');
 const sass = require('gulp-sass');
 const sourcemaps = require('gulp-sourcemaps');
+const {
+  green,
+  magenta,
+  cyan,
+  red,
+} = require('chalk');
 const { spawn } = require('child_process');
 
-const { log } = console;
+const { LIVERELOAD_PORT } = process.env;
 
 sass.compiler = require('node-sass');
 
@@ -22,12 +30,16 @@ let node;
 const server = async () => {
   if (node) node.kill();
   node = await spawn('node', ['src/index.js'], { stdio: ['inherit', 'inherit', 'inherit', 'ipc'] });
-  node.on('message', msg => log('> Received message from subprocess', msg));
+  node.on('message', (msg) => {
+    if (msg === 'ready') {
+      livereload.changed('/');
+    }
+  });
   node.on('close', (code, signal) => {
     const exited = [];
     if (code) exited.push(`code ${code}`);
     if (signal) exited.push(`signal ${signal}`);
-    log(`> Node subprocess (via Gulp) exited with ${exited.join(' ')}`);
+    log(`Process ${green('exited')} with ${magenta(exited.join(' '))}`);
   });
 };
 
@@ -62,13 +74,15 @@ const css = () => src('src/styles/app.scss')
 const build = parallel(css);
 
 const serve = () => {
+  livereload.listen({ port: LIVERELOAD_PORT });
+  log(`Livereload ${green('listening')} on port ${magenta(LIVERELOAD_PORT)}`);
   const watcher = watch(
     ['src/**/*.js', '!src/**/*.marko.js', 'src/styles/**/*.scss', 'src/**/*.marko'],
     { queue: false, ignoreInitial: false },
     parallel(lint, series(css, server)),
   );
-  watcher.on('change', path => log(`File ${path} was changed.`));
-  watcher.on('unlink', path => log(`File ${path} was removed.`));
+  watcher.on('change', path => log(`File ${green(path)} was ${cyan('changed')}`));
+  watcher.on('unlink', path => log(`File ${green(path)} was ${red('removed')}.`));
 };
 
 exports.default = serve;
