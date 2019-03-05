@@ -1,12 +1,13 @@
 const {
-  task,
-  src,
   dest,
+  src,
 } = require('gulp');
-const sass = require('gulp-sass');
+const gulpSass = require('gulp-sass');
 
-sass.compiler = require('node-sass');
+gulpSass.compiler = require('node-sass');
 
-task('sass', () => src('./src/styles/app.scss')
-  .pipe(sass().on('error', sass.logError))
-  .pipe(dest('./dist')));
+const sass = () => src('./src/styles/app.scss')
+  .pipe(gulpSass().on('error', gulpSass.logError))
+  .pipe(dest('./dist'));
+
+exports.sass = sass;
