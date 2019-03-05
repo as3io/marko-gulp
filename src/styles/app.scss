@@ -17,3 +17,19 @@ a {
     text-decoration: underline;
   }
 }
+
+.select-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  span {
+    display: block;
+    margin-bottom: 1rem;
+  }
+}
+
+select {
+  // Test for autoprefixer
+  appearance: none;
+  max-width: 25vw;
+}
