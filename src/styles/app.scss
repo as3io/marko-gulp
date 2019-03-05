@@ -1,0 +1,19 @@
+@import "variables";
+
+html {
+  font-family: $font-family-sans-serif;
+}
+
+body {
+  color: $body-color;
+  background-color: $body-bg;
+}
+
+a {
+  color: $primary;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
