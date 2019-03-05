@@ -19,9 +19,13 @@ const {
   magenta,
   cyan,
   red,
+  yellow,
 } = require('chalk');
 const { spawn } = require('child_process');
 
+if (!process.env.LIVERELOAD_PORT) {
+  process.env.LIVERELOAD_PORT = 37800;
+}
 const { LIVERELOAD_PORT } = process.env;
 
 sass.compiler = require('node-sass');
@@ -31,7 +35,8 @@ const server = async () => {
   if (node) node.kill();
   node = await spawn('node', ['src/index.js'], { stdio: ['inherit', 'inherit', 'inherit', 'ipc'] });
   node.on('message', (msg) => {
-    if (msg === 'ready') {
+    if (msg.event === 'ready') {
+      log(`Server ${green('ready')} on ${yellow(msg.location)}`);
       livereload.changed('/');
     }
   });
@@ -74,13 +79,14 @@ const css = () => src('src/styles/app.scss')
 const build = parallel(css);
 
 const serve = () => {
-  livereload.listen({ port: LIVERELOAD_PORT });
+  livereload.listen({ port: LIVERELOAD_PORT, quiet: true });
   log(`Livereload ${green('listening')} on port ${magenta(LIVERELOAD_PORT)}`);
   const watcher = watch(
     ['src/**/*.js', '!src/**/*.marko.js', 'src/styles/**/*.scss', 'src/**/*.marko'],
     { queue: false, ignoreInitial: false },
     parallel(lint, series(css, server)),
   );
+  watcher.on('add', path => log(`File ${green(path)} was ${green('added')}`));
   watcher.on('change', path => log(`File ${green(path)} was ${cyan('changed')}`));
   watcher.on('unlink', path => log(`File ${green(path)} was ${red('removed')}.`));
 };
