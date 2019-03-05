@@ -8,7 +8,10 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "NODE_ENV=development LIVERELOAD_PORT=37801 PORT=5000 ./node_modules/.bin/gulp"
+    "dev": "NODE_ENV=development LIVERELOAD_PORT=37801 PORT=5000 ./node_modules/.bin/gulp",
+    "lint": "./node_modules/.bin/gulp lint",
+    "lint:js": "./node_modules/.bin/gulp lint:js",
+    "lint:scss": "./node_modules/.bin/gulp lint:scss"
   },
   "dependencies": {
     "express": "^4.16.4",

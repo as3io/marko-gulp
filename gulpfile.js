@@ -14,6 +14,7 @@ const log = require('fancy-log');
 const postcss = require('gulp-postcss');
 const sass = require('gulp-sass');
 const sourcemaps = require('gulp-sourcemaps');
+const styelint = require('gulp-stylelint');
 const {
   green,
   magenta,
@@ -50,10 +51,21 @@ const server = async () => {
   });
 };
 
-const lint = () => src(['src/**/*.js', '!src/**/*.marko.js'])
+const lintStyles = () => src('src/styles/**/*.scss')
+  .pipe(cache('stylelint'))
+  .pipe(styelint({
+    failAfterError: false,
+    reporters: [
+      { formatter: 'string', console: true },
+    ],
+  }));
+
+const lintScripts = () => src(['src/**/*.js', '!src/**/*.marko.js'])
   .pipe(cache('lint'))
   .pipe(eslint())
   .pipe(eslint.format());
+
+const lint = parallel(lintScripts, lintStyles);
 
 const css = () => src('src/styles/app.scss')
   .pipe(sourcemaps.init())
@@ -98,4 +110,6 @@ const serve = () => {
 exports.default = serve;
 exports.serve = serve;
 exports.lint = lint;
+exports['lint:js'] = lintScripts;
+exports['lint:scss'] = lintStyles;
 exports.build = build;
