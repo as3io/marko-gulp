@@ -35,3 +35,6 @@ This command runs the dev environment:
   - Compile the `app.scss` into regular CSS (via the `build` task)
   - Spawn a Node subprocess and run the Express server
   - Once the Express server is ready, notify livereload to refresh the browser window
+
+## VSCode
+For quicker linting inside VSCode, it's recommended to install the [Stylelint](https://github.com/shinnn/vscode-stylelint) and [ESLint](https://github.com/Microsoft/vscode-eslint) extensions.
