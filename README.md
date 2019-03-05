@@ -30,7 +30,7 @@ Reads the `src/styles.app.scss` SASS file and transforms it into a regular CSS f
 - Write the sourcemap
 - Save the `app.css` and `app.css.map` to the `./dist` folder
 
-## Serve
+### Serve
 This command runs the dev environment:
 - A browser live reload server is started and runs on `LIVERELOAD_PORT`. This allows the browser to automatically refresh when files change.
 - All JavaScript (`.js`), Marko template (`.marko` _not_ `.marko.js`) and SASS (`.scss`) files are watched within the project `./src` directory.
