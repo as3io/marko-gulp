@@ -7,6 +7,9 @@
   "author": "Jacob Bare <jacob@limit0.io>",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "dev": "node src/index.js"
+  },
   "dependencies": {
     "express": "^4.16.4",
     "marko": "^4.15.3"
