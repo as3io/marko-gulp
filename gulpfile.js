@@ -30,9 +30,11 @@ const { LIVERELOAD_PORT } = process.env;
 
 sass.compiler = require('node-sass');
 
+let isFirstRun = true;
 let node;
 const server = async () => {
   if (node) node.kill();
+  isFirstRun = false;
   node = await spawn('node', ['src/index.js'], { stdio: ['inherit', 'inherit', 'inherit', 'ipc'] });
   node.on('message', (msg) => {
     if (msg.event === 'ready') {
@@ -86,7 +88,9 @@ const serve = () => {
     { queue: false, ignoreInitial: false },
     parallel(lint, series(css, server)),
   );
-  watcher.on('add', path => log(`File ${green(path)} was ${green('added')}`));
+  watcher.on('add', (path) => {
+    if (!isFirstRun) log(`File ${green(path)} was ${green('added')}`);
+  });
   watcher.on('change', path => log(`File ${green(path)} was ${cyan('changed')}`));
   watcher.on('unlink', path => log(`File ${green(path)} was ${red('removed')}.`));
 };
