@@ -5,7 +5,8 @@ Example respository for creating a dev enviroment with Gulp, ESLint, Styelint, M
 
 ## Usage
 1. Clone the repository
-2. Run `yarn dev`
+2. Install dependencies via `yarn install`
+3. Run `yarn dev`
 
 This will run the default Gulp task (as defined in `gulpfile.js`) and set the `NODE_ENV`, `LIVERELOAD_PORT` and `PORT` environment variables.
 
